@@ -17,6 +17,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JCheckBox;
+import java.awt.Component;
+import java.awt.FlowLayout;
 
 public class FrameClass extends javax.swing.JFrame {
 	/**
@@ -90,7 +93,12 @@ public class FrameClass extends javax.swing.JFrame {
 		scroll.setColumnHeaderView(lblInput);
 
 		JPanel panel_1 = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
+		flowLayout.setAlignment(FlowLayout.RIGHT);
+		flowLayout.setHgap(25);
+		panel_1.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.anchor = GridBagConstraints.EAST;
 		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_1.gridx = 0;
 		gbc_panel_1.gridy = 2;
@@ -98,6 +106,12 @@ public class FrameClass extends javax.swing.JFrame {
 
 		JButton btnScrub = new JButton("Scrub");
 		panel_1.add(btnScrub);
+		
+		final JCheckBox chckbxAddJiraFormatting = new JCheckBox("Add Jira Formatting Tags");
+		chckbxAddJiraFormatting.setToolTipText("This option adds {noformat} tags around the output so that it displays normally in Jira");
+		chckbxAddJiraFormatting.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		chckbxAddJiraFormatting.setMargin(new Insets(2, 20, 2, 2));
+		panel_1.add(chckbxAddJiraFormatting);
 
 		btnPasteFromClipboard.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +121,7 @@ public class FrameClass extends javax.swing.JFrame {
 		
 		btnScrub.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton1ActionPerformed(evt, textArea, textArea1);
+				jButton1ActionPerformed(evt, textArea, textArea1, chckbxAddJiraFormatting.isSelected());
 			}
 		});
 
@@ -147,10 +161,19 @@ public class FrameClass extends javax.swing.JFrame {
 		pack();
 	}
 
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt, JTextArea textArea, JTextArea textArea1) {
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt, JTextArea textArea, JTextArea textArea1, boolean jiraFormat) {
 		String input = textArea.getText();
 
+		if (jiraFormat == true)
+		{
+			textArea1.setText("{noformat}" + ScrubHL7.ValidateHL7(input) + "{noformat}");
+		}
+		else
+		{
 		textArea1.setText(ScrubHL7.ValidateHL7(input));
+		}
+		
+		
 	}
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt, JTextArea textArea, JTextArea textArea1) {
