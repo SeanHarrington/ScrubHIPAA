@@ -63,7 +63,7 @@ public class ScrubHL7 {
 			String newSecondString = "";
 			if (dateOfBirthLength > 8) {
 				timeOfBirth = dateOfBirth.substring(8, dateOfBirthLength);
-				int newHour = rand.nextInt(12) + 1;
+				int newHour = rand.nextInt(23) + 1;
 				int newMinute = rand.nextInt(59) + 1;
 				int newSecond = rand.nextInt(59) + 1;
 
@@ -120,7 +120,7 @@ public class ScrubHL7 {
 			String newSecondString = "";
 			if (dateOfBirthLength > 8) {
 				timeOfBirth = dateOfBirth.substring(8, dateOfBirthLength);
-				int newHour = rand.nextInt(12) + 1;
+				int newHour = rand.nextInt(23) + 1;
 				int newMinute = rand.nextInt(59) + 1;
 				int newSecond = rand.nextInt(59) + 1;
 
