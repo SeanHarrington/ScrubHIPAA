@@ -1,4 +1,9 @@
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 
@@ -6,6 +11,142 @@ public class ScrubHL7 {
 
 	public ScrubHL7() {
 
+	}
+
+	public static int getAge(String dateOfBirth) {
+		int year = Integer.parseInt(dateOfBirth.substring(0, 4));
+		int month = Integer.parseInt(dateOfBirth.substring(4, 6));
+		int day = Integer.parseInt(dateOfBirth.substring(6, 7));
+
+		Date now = new Date();
+		int nowMonth = now.getMonth() + 1;
+		int nowYear = now.getYear() + 1900;
+		int result = nowYear - year;
+
+		if (month > nowMonth) {
+			result--;
+		} else if (month == nowMonth) {
+			int nowDay = now.getDate();
+
+			if (day > nowDay) {
+				result--;
+			}
+		}
+		return result;
+	}
+
+	public static String changeDate(String dateOfBirth) {
+		Random rand = new Random();
+		Date now = new Date();
+		String timeOfBirth = "";
+		int currentAge = getAge(dateOfBirth.substring(0, 7));
+		if (currentAge > 18) {
+			// change the date to another date between 19 and 99 years old
+			// new year = currentyear - age + random(18)
+			int newYear = now.getYear() + 1900 - (rand.nextInt(80) + 19);
+			String newYearString = new Integer(newYear).toString();
+			// new month = random(12)
+			int newMonth = rand.nextInt(12) + 1;
+			String newMonthString = new Integer(newMonth).toString();
+			if (newMonthString.length() == 1) {
+				newMonthString = "0" + newMonthString;
+			}
+			// new day = random(28)
+			int newDay = rand.nextInt(28) + 1;
+			String newDayString = new Integer(newDay).toString();
+			if (newDayString.length() == 1) {
+				newDayString = "0" + newDayString;
+			}
+			Integer dateOfBirthLength = dateOfBirth.length();
+			String newHourString = "";
+			String newMinuteString = "";
+			String newSecondString = "";
+			if (dateOfBirthLength > 8) {
+				timeOfBirth = dateOfBirth.substring(8, dateOfBirthLength);
+				int newHour = rand.nextInt(12) + 1;
+				int newMinute = rand.nextInt(59) + 1;
+				int newSecond = rand.nextInt(59) + 1;
+
+				newHourString = new Integer(newHour).toString();
+				if (timeOfBirth.length() > 2) {
+					newMinuteString = new Integer(newMinute).toString();
+				}
+				if (timeOfBirth.length() > 4) {
+					newSecondString = new Integer(newSecond).toString();
+				}
+
+				if (newHourString.length() == 1) {
+					newHourString = "0" + newHourString;
+				}
+				if (newMinuteString.length() == 1) {
+					newMinuteString = "0" + newMinuteString;
+				}
+				if (newSecondString.length() == 1) {
+					newSecondString = "0" + newSecondString;
+				}
+				timeOfBirth = newHourString + newMinuteString + newSecondString;
+			}
+
+			else {
+
+				dateOfBirth = "";
+			}
+			dateOfBirth = newYearString + newMonthString + newDayString + timeOfBirth;
+		}
+
+		else
+
+		{
+			// change the date to another date between 0 and 18 years
+			// new year = currentyear - age + random(18)
+			int newYear = now.getYear() + 1900 - rand.nextInt(18) + 1;
+			String newYearString = new Integer(newYear).toString();
+			// new month = random(12)
+			int newMonth = rand.nextInt(12) + 1;
+			String newMonthString = new Integer(newMonth).toString();
+			if (newMonthString.length() == 1) {
+				newMonthString = "0" + newMonthString;
+			}
+			// new day = random(28)
+			int newDay = rand.nextInt(28) + 1;
+			String newDayString = new Integer(newDay).toString();
+			if (newDayString.length() == 1) {
+				newDayString = "0" + newDayString;
+			}
+			Integer dateOfBirthLength = dateOfBirth.length();
+
+			String newHourString = "";
+			String newMinuteString = "";
+			String newSecondString = "";
+			if (dateOfBirthLength > 8) {
+				timeOfBirth = dateOfBirth.substring(8, dateOfBirthLength);
+				int newHour = rand.nextInt(12) + 1;
+				int newMinute = rand.nextInt(59) + 1;
+				int newSecond = rand.nextInt(59) + 1;
+
+				newHourString = new Integer(newHour).toString();
+				if (timeOfBirth.length() > 2) {
+					newMinuteString = new Integer(newMinute).toString();
+				}
+				if (timeOfBirth.length() > 4) {
+					newSecondString = new Integer(newSecond).toString();
+				}
+
+				if (newHourString.length() == 1) {
+					newHourString = "0" + newHourString;
+				}
+				if (newMinuteString.length() == 1) {
+					newMinuteString = "0" + newMinuteString;
+				}
+				if (newSecondString.length() == 1) {
+					newSecondString = "0" + newSecondString;
+				}
+				timeOfBirth = newHourString + newMinuteString + newSecondString;
+
+			}
+			dateOfBirth = newYearString + newMonthString + newDayString + timeOfBirth;
+		}
+		return dateOfBirth;
 	}
 
 	public static String[] parseHl7(String[] fields, int i, int[] intArray) {
@@ -80,14 +221,14 @@ public class ScrubHL7 {
 					int[] intArray = new int[] { 0, 3, 4, 5, 6, 7, 9, 11 };
 					fields = parseHl7(fields, i, intArray);
 				}
-				//CE & CWE TYPE
+				// CE & CWE TYPE
 				else if (i == 16 || i == 17 || i == 23 || i == 26 || i == 27 || i == 39) {
 					int[] intArray = new int[] { 0, 1, 3, 4, 9 };
 					fields = parseHl7(fields, i, intArray);
 				}
 				// DLN type
 				else if (i == 20) {
-					int[] intArray = new int[] { 0, 2};
+					int[] intArray = new int[] { 0, 2 };
 					fields = parseHl7(fields, i, intArray);
 				}
 
@@ -107,18 +248,45 @@ public class ScrubHL7 {
 	}
 
 	public static String ChangeString(String input) {
-		// ToDo:
-		if (input != null && !input.isEmpty()) {
-			char[] individuals = input.toCharArray();
-			for (int i = 0; i != individuals.length; i++) {
-				if (Character.isDigit(individuals[i])) {
-					individuals[i] = Character.forDigit(randInt(0, 9), 10);
-				} else if (Character.isLetter(individuals[i])) {
-					individuals[i] = randChar();
-				}
+		// ToDo: check if its a date format. if it is, then change it as a date
+		if (input.length() > 14) {
+			if (DateUtil.convertToDate(input.substring(0, input.length() - (input.length() - 14))) != null) {
+				String timeZone = input.substring( input.length() - (input.length() - 14),input.length());
+				return changeDate(input.substring(0, input.length() - (input.length() - 14))) + timeZone;
 
 			}
-			return new String(individuals);
+
+			if (input != null && !input.isEmpty()) {
+				char[] individuals = input.toCharArray();
+				for (int i = 0; i != individuals.length; i++) {
+					if (Character.isDigit(individuals[i])) {
+						individuals[i] = Character.forDigit(randInt(0, 9), 10);
+					} else if (Character.isLetter(individuals[i])) {
+						individuals[i] = randChar();
+					}
+
+				}
+				return new String(individuals);
+			}
+
+		} else {
+			if (DateUtil.convertToDate(input) != null) {
+				return changeDate(input);
+
+			}
+
+			if (input != null && !input.isEmpty()) {
+				char[] individuals = input.toCharArray();
+				for (int i = 0; i != individuals.length; i++) {
+					if (Character.isDigit(individuals[i])) {
+						individuals[i] = Character.forDigit(randInt(0, 9), 10);
+					} else if (Character.isLetter(individuals[i])) {
+						individuals[i] = randChar();
+					}
+
+				}
+				return new String(individuals);
+			}
 		}
 		return input;
 	}
