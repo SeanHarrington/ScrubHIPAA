@@ -11,41 +11,31 @@ public class ScrubHL7 {
 		// loop through all the fields
 		for (int i = 0; i != fields.length; i++) {
 			if (fields[i] != null && !fields[i].isEmpty()) {
-				// CX Type & TS/DTM & IS
 				if (i == 5 || i == 6 || i == 7 || i == 8 || i == 19 || i == 20 || i == 21) {
-					int[] intArray = new int[] { 0 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseCX_TS_DTM_IS_ID_NM(fields, i); // CX & TS & DTM & IS & ID & NM type
 				}
-				// XPN TYPE & XCN
 				else if (i == 4) {
-					int[] intArray = new int[] { 0, 1, 2, 3, 4, 5, 6 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXPN_XCN(fields, i); // XPN & XCN type
 				}
-				// XAD type
 				else if (i == 99) {
-					int[] intArray = new int[] { 0, 1, 2, 7, 8, 9 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXAD(fields, i); // XAD type
 				}
-				// XTN type
 				else if (i == 99) {
-					int[] intArray = new int[] { 0, 3, 4, 5, 6, 7, 9, 11 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXTN(fields, i); // XTN type
 				}
-				// CE & CWE TYPE
 				else if (i == 99) {
-					int[] intArray = new int[] { 0, 1, 3, 4, 9 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseCE_CWE(fields, i); // CE&CWE type
 				}
-				// DLN type
 				else if (i == 99) {
-					int[] intArray = new int[] { 0, 2 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseDLN(fields, i); // DLN type
 				}
-				// XON Type
 				else if (i == 3 || i == 14) {
-					int[] intArray = new int[] { 0, 2, 7, 9 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXON(fields, i); // XON type
 				}
+				else if (i == 99) {
+					fields = ParseHD(fields, i); // HD type
+				}
+
 			}
 		}
 		// combine the fields back into a input
@@ -67,37 +57,32 @@ public class ScrubHL7 {
 
 		// loop through all the fields
 		for (int i = 0; i != fields.length; i++) {
-			// CX Type & TS/DTM
 			if (fields[i] != null && !fields[i].isEmpty()) {
-
 				if (i == 3 || i == 4 || i == 7 || i == 29 || i == 18) {
-					int[] intArray = new int[] { 0 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseCX_TS_DTM_IS_ID_NM(fields, i); // CX & TS & DTM & IS & ID & NM type
 				}
-				// XPN TYPE
 				else if (i == 5 || i == 6 || i == 9) {
-					int[] intArray = new int[] { 0, 1, 2, 3, 4, 5, 6 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXPN_XCN(fields, i); // XPN & XCN type
 				}
-				// XAD type
 				else if (i == 11) {
-					int[] intArray = new int[] { 0, 1, 2, 7, 8, 9 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXAD(fields, i); // XAD type
 				}
-				// XTN type
 				else if (i == 13 || i == 14) {
-					int[] intArray = new int[] { 0, 3, 4, 5, 6, 7, 9, 11 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXTN(fields, i); // XTN type
 				}
-				// CE & CWE TYPE
 				else if (i == 16 || i == 17 || i == 23 || i == 26 || i == 27 || i == 39) {
-					int[] intArray = new int[] { 0, 1, 3, 4, 9 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseCE_CWE(fields, i); // CE&CWE type
 				}
-				// DLN type
 				else if (i == 20) {
-					int[] intArray = new int[] { 0, 2 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseDLN(fields, i); // DLN type
+				} 
+				else if (i == 99) {
+					fields = ParseXON(fields, i); // XON type
+				}
+
+				else if (i == 99) 
+				{
+					fields = ParseHD(fields, i); // HD type
 				}
 
 			}
@@ -122,40 +107,29 @@ public class ScrubHL7 {
 		// loop through all the fields
 		for (int i = 0; i != fields.length; i++) {
 			if (fields[i] != null && !fields[i].isEmpty()) {
-				// CX Type & TS/DTM & IS
 				if (i == 10 || i == 12 || i == 16 || i == 37 || i == 38) {
-					int[] intArray = new int[] { 0 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseCX_TS_DTM_IS_ID_NM(fields, i); // CX & TS & DTM & IS & ID & NM type
 				}
-				// XPN TYPE & XCN
 				else if (i == 2 || i == 26 || i == 30) {
-					int[] intArray = new int[] { 0, 1, 2, 3, 4, 5, 6 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXPN_XCN(fields, i); // XPN & XCN type
 				}
-				// XAD type
 				else if (i == 4 || i == 32) {
-					int[] intArray = new int[] { 0, 1, 2, 7, 8, 9 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXAD(fields, i); // XAD type
 				}
-				// XTN type
 				else if (i == 5 || i == 6 || i == 31) {
-					int[] intArray = new int[] { 0, 3, 4, 5, 6, 7, 9, 11 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXTN(fields, i); // XTN type
 				}
-				// CE & CWE TYPE
 				else if (i == 99) {
-					int[] intArray = new int[] { 0, 1, 3, 4, 9 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseCE_CWE(fields, i); // CE&CWE type
 				}
-				// DLN type
 				else if (i == 99) {
-					int[] intArray = new int[] { 0, 2 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseDLN(fields, i); // DLN type
 				}
-				// XON Type
 				else if (i == 13) {
-					int[] intArray = new int[] { 0, 2, 7, 9 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXON(fields, i); // XON type
+				}
+				else if (i == 99) {
+					fields = ParseHD(fields, i); // HD type
 				}
 			}
 		}
@@ -167,8 +141,8 @@ public class ScrubHL7 {
 			}
 		}
 		return input;
-	}	
-	
+	}
+
 	public static String ScrubQPD(String input) {
 		String[] fields = input.split("\\|");
 		input = ""; // clear the input
@@ -176,47 +150,31 @@ public class ScrubHL7 {
 		// loop through all the fields
 		for (int i = 0; i != fields.length; i++) {
 			if (fields[i] != null && !fields[i].isEmpty()) {
-				// CX Type & TS/DTM & IS & ID & NM
 				if (i == 3 || i == 6 || i == 10 || i == 11) {
-					int[] intArray = new int[] { 0 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseCX_TS_DTM_IS_ID_NM(fields, i); // CX & TS & DTM & IS & ID & NM type
 				}
-				// XPN TYPE & XCN
 				else if (i == 4 || i == 5) {
-					int[] intArray = new int[] { 0, 1, 2, 3, 4, 5, 6 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXPN_XCN(fields, i); // XPN & XCN type
 				}
-				// XAD type
 				else if (i == 8) {
-					int[] intArray = new int[] { 0, 1, 2, 7, 8, 9 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXAD(fields, i); // XAD type
 				}
-				// XTN type
 				else if (i == 9) {
-					int[] intArray = new int[] { 0, 3, 4, 5, 6, 7, 9, 11 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXTN(fields, i); // XTN type
 				}
-				// CE & CWE TYPE
 				else if (i == 99) {
-					int[] intArray = new int[] { 0, 1, 3, 4, 9 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseCE_CWE(fields, i); // CE&CWE type
 				}
-				// DLN type
 				else if (i == 99) {
-					int[] intArray = new int[] { 0, 2 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseDLN(fields, i); // DLN type
 				}
-				// XON Type
 				else if (i == 99) {
-					int[] intArray = new int[] { 0, 2, 7, 9 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXON(fields, i); // XON type
 				}
-				// HD type
 				else if (i == 13) {
-					int[] intArray = new int[] { 0, 1 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseHD(fields, i); // HD type
 				}
-				
+
 			}
 		}
 		// combine the fields back into a input
@@ -227,8 +185,8 @@ public class ScrubHL7 {
 			}
 		}
 		return input;
-	}	
-	
+	}
+
 	public static String ScrubNTE(String input) {
 		String[] fields = input.split("\\|");
 		input = ""; // clear the input
@@ -236,47 +194,31 @@ public class ScrubHL7 {
 		// loop through all the fields
 		for (int i = 0; i != fields.length; i++) {
 			if (fields[i] != null && !fields[i].isEmpty()) {
-				// CX Type & TS/DTM & IS & ID & NM
 				if (i == 3) {
-					int[] intArray = new int[] { 0 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseCX_TS_DTM_IS_ID_NM(fields, i); // CX & TS & DTM & IS & ID & NM type
 				}
-				// XPN TYPE & XCN
 				else if (i == 99) {
-					int[] intArray = new int[] { 0, 1, 2, 3, 4, 5, 6 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXPN_XCN(fields, i); // XPN & XCN type
 				}
-				// XAD type
 				else if (i == 99) {
-					int[] intArray = new int[] { 0, 1, 2, 7, 8, 9 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXAD(fields, i); // XAD type
 				}
-				// XTN type
 				else if (i == 99) {
-					int[] intArray = new int[] { 0, 3, 4, 5, 6, 7, 9, 11 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXTN(fields, i); // XTN type
 				}
-				// CE & CWE TYPE
 				else if (i == 99) {
-					int[] intArray = new int[] { 0, 1, 3, 4, 9 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseCE_CWE(fields, i); // CE&CWE type
 				}
-				// DLN type
 				else if (i == 99) {
-					int[] intArray = new int[] { 0, 2 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseDLN(fields, i); // DLN type
 				}
-				// XON Type
 				else if (i == 99) {
-					int[] intArray = new int[] { 0, 2, 7, 9 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseXON(fields, i); // XON type
 				}
-				// HD type
 				else if (i == 99) {
-					int[] intArray = new int[] { 0, 1 };
-					fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+					fields = ParseHD(fields, i); // HD type
 				}
-				
+
 			}
 		}
 		// combine the fields back into a input
@@ -287,9 +229,99 @@ public class ScrubHL7 {
 			}
 		}
 		return input;
+	}
+
+	public static String ScrubPV1(String input) {
+		String[] fields = input.split("\\|");
+		input = ""; // clear the input
+		// split on pipe
+		// loop through all the fields
+		for (int i = 0; i != fields.length; i++) {
+			if (fields[i] != null && !fields[i].isEmpty()) {
+				if (i == 99) {
+					fields = ParseCX_TS_DTM_IS_ID_NM(fields, i); // CX & TS & DTM & IS & ID & NM type
+				}
+				else if (i == 99) {
+					fields = ParseXPN_XCN(fields, i); // XPN & XCN type
+				}
+				else if (i == 99) {
+					fields = ParseXAD(fields, i); // XAD type
+				}
+				else if (i == 99) {
+					fields = ParseXTN(fields, i); // XTN type
+				}
+				else if (i == 99) {
+					fields = ParseCE_CWE(fields, i); // CE&CWE type
+				}
+				else if (i == 99) {
+					fields = ParseDLN(fields, i); // DLN type
+				}
+				else if (i == 99) {
+					fields = ParseXON(fields, i); // XON type
+				}
+				else if (i == 99) {
+					fields = ParseHD(fields, i); // HD type
+				}
+			}
+		}
+		// combine the fields back into a input
+		for (int k = 0; k != fields.length; k++) {
+			input = input + fields[k];
+			if (k < fields.length - 1) {
+				input = input + "|";
+			}
+		}
+		return input;
+	}
+
+	public static String[] ParseCX_TS_DTM_IS_ID_NM(String[] fields, int i) {
+		int[] intArray = new int[] { 0 };
+		fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+		return fields;
 	}	
 	
+	public static String[] ParseXPN_XCN(String[] fields, int i) {
+		int[] intArray = new int[] { 0, 1, 2, 3, 4, 5 };
+		fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+		return fields;
+	}	
 	
+	public static String[] ParseXAD(String[] fields, int i) {
+		int[] intArray = new int[] { 0, 1, 2, 7, 8, 9 };
+		fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+		return fields;
+	}	
+	
+	public static String[] ParseXTN(String[] fields, int i) {
+		int[] intArray = new int[] { 0, 3, 4, 5, 6, 7, 9, 11 };
+		fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+		return fields;
+	}	
+
+	public static String[] ParseCE_CWE(String[] fields, int i) {
+		int[] intArray = new int[] { 0, 1, 3, 4, 9 };
+		fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+		return fields;
+	}	
+	
+	public static String[] ParseDLN(String[] fields, int i) {
+		int[] intArray = new int[] { 0, 2 };
+		fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+		return fields;
+	}	
+	
+	public static String[] ParseXON(String[] fields, int i) {
+		int[] intArray = new int[] { 0, 2, 7, 9 };
+		fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+		return fields;
+	}
+	
+	public static String[] ParseHD(String[] fields, int i) {
+		int[] intArray = new int[] { 0, 1 };
+		fields = ParseAndChangeData.parseHl7(fields, i, intArray);
+		return fields;
+	}
+
 	public static String ValidateHL7(String input) {
 
 		String output = "";
@@ -312,11 +344,11 @@ public class ScrubHL7 {
 						newString = ScrubPID(segments[i]);
 
 					} else if ("PV1".equals(segments[i].substring(0, 3))) {
-						newString = segments[i];
+						newString = ScrubPV1(segments[i]);
 
 					} else if ("PD1".equals(segments[i].substring(0, 3))) {
 						newString = ScrubPD1(segments[i]);
-						
+
 					} else if ("QPD".equals(segments[i].substring(0, 3))) {
 						newString = ScrubQPD(segments[i]);
 
@@ -325,7 +357,7 @@ public class ScrubHL7 {
 
 					} else if ("NTE".equals(segments[i].substring(0, 3))) {
 						newString = ScrubNTE(segments[i]);
-	
+
 					} else {
 						newString = segments[i];
 					}

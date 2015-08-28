@@ -3,11 +3,10 @@ import java.util.Random;
 
 public class ParseAndChangeData {
 
-	public ParseAndChangeData()
-	{
-		
+	public ParseAndChangeData() {
+
 	}
-	
+
 	public static int getAge(String dateOfBirth) {
 		int year = Integer.parseInt(dateOfBirth.substring(0, 4));
 		int month = Integer.parseInt(dateOfBirth.substring(4, 6));
@@ -189,7 +188,7 @@ public class ParseAndChangeData {
 		// ToDo: check if its a date format. if it is, then change it as a date
 		if (input.length() > 14) {
 			if (DateUtil.convertToDate(input.substring(0, input.length() - (input.length() - 14))) != null) {
-				String timeZone = input.substring( input.length() - (input.length() - 14),input.length());
+				String timeZone = input.substring(input.length() - (input.length() - 14), input.length());
 				return changeDate(input.substring(0, input.length() - (input.length() - 14))) + timeZone;
 
 			}
@@ -219,7 +218,14 @@ public class ParseAndChangeData {
 					if (Character.isDigit(individuals[i])) {
 						individuals[i] = Character.forDigit(randInt(0, 9), 10);
 					} else if (Character.isLetter(individuals[i])) {
-						individuals[i] = randChar();
+						if (Character.isUpperCase(individuals[i])) 
+						{
+							individuals[i] = Character.toUpperCase(randChar());
+						} 
+						else 
+						{
+							individuals[i] = Character.toLowerCase(randChar());
+						}
 					}
 
 				}
@@ -249,7 +255,4 @@ public class ParseAndChangeData {
 		return randomNum;
 	}
 
-
-	
-	
 }

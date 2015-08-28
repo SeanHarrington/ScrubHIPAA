@@ -44,10 +44,11 @@ public class FrameClass extends javax.swing.JFrame {
 		gridBagLayout.columnWidths = new int[] { 494, 0 };
 		gridBagLayout.rowHeights = new int[] { 50, 157, 50, 157, 50 };
 		gridBagLayout.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 1.0 };
+		gridBagLayout.rowWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 0.0 };
 		frame.getContentPane().setLayout(gridBagLayout);
 
 		final JTextArea textArea1 = new JTextArea();
+		textArea1.setSize(new Dimension(1, 1));
 		textArea1.setSize(200, 200);
 
 		textArea1.setLineWrap(true);
@@ -93,10 +94,9 @@ public class FrameClass extends javax.swing.JFrame {
 
 		JPanel panel_1 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_1.getLayout();
-		flowLayout.setAlignment(FlowLayout.RIGHT);
 		flowLayout.setHgap(25);
-		panel_1.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_panel_1.anchor = GridBagConstraints.EAST;
 		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_1.gridx = 0;
@@ -104,6 +104,7 @@ public class FrameClass extends javax.swing.JFrame {
 		frame.getContentPane().add(panel_1, gbc_panel_1);
 
 		JButton btnScrub = new JButton("Scrub");
+		btnScrub.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel_1.add(btnScrub);
 		
 		final JCheckBox chckbxAddJiraFormatting = new JCheckBox("Add Jira Formatting Tags");
@@ -138,7 +139,9 @@ public class FrameClass extends javax.swing.JFrame {
 		scroll1.setColumnHeaderView(lblOutput);
 
 		JPanel panel_2 = new JPanel();
+		panel_2.setMaximumSize(new Dimension(32767, 100));
 		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
+		gbc_panel_2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_panel_2.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_2.gridx = 0;
 		gbc_panel_2.gridy = 4;
