@@ -107,7 +107,7 @@ public class ScrubHL7 {
 		// loop through all the fields
 		for (int i = 0; i != fields.length; i++) {
 			if (fields[i] != null && !fields[i].isEmpty()) {
-				if (i == 10 || i == 12 || i == 16 || i == 37 || i == 38) {
+				if (i == 10 || i == 12 || i == 16 || i == 37 || i == 38 || i == 33) {
 					fields = ParseCX_TS_DTM_IS_ID_NM(fields, i); // CX & TS & DTM & IS & ID & NM type
 				}
 				else if (i == 2 || i == 26 || i == 30) {

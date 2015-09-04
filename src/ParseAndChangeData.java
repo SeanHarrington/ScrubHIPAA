@@ -93,7 +93,7 @@ public class ParseAndChangeData {
 		{
 			// change the date to another date between 0 and 18 years
 			// new year = currentyear - age + random(18)
-			int newYear = now.getYear() + 1900 - rand.nextInt(18) + 1;
+			int newYear = now.getYear() + 1900 - (rand.nextInt(18) + 1);
 			String newYearString = new Integer(newYear).toString();
 			// new month = random(12)
 			int newMonth = rand.nextInt(12) + 1;
@@ -199,7 +199,14 @@ public class ParseAndChangeData {
 					if (Character.isDigit(individuals[i])) {
 						individuals[i] = Character.forDigit(randInt(0, 9), 10);
 					} else if (Character.isLetter(individuals[i])) {
-						individuals[i] = randChar();
+						if (Character.isUpperCase(individuals[i])) 
+						{
+							individuals[i] = Character.toUpperCase(randChar());
+						} 
+						else 
+						{
+							individuals[i] = Character.toLowerCase(randChar());
+						}
 					}
 
 				}
